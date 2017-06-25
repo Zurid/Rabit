@@ -1,20 +1,22 @@
-export const hunterReducer = (prevState = {}, action) => {
-    //    console.log("addHunter-reducer", action, prevState);
+export const hunterReducer = (prevState = {names:[]}, action) => {
     switch (action.type) {
         case 'ADD':
-            //console.log(action, state);
+            const newNames = prevState.names.slice();
+            if (!newNames.includes(action.newName)) {
+                newNames.push(action.newName);
+            }
+            const res = {
+                ...prevState,
+                name: "",
+                //                prevState,
+                names: newNames
+            };
+            if (!res.names.includes(action.newName)) {
+                res.names.push(action.newName);
+            }
 
-            const res = Object.assign(
-                { name: "" },
-                prevState,
-                { names: action.names }
-
-            );
-            console.log("reducer res", res);
+            console.log("hunterReducer", res);
             return res;
-
-        //            return { names: action.names };
-        //return [...state, Object.assign({},action.name)];
-        default: return prevState;
     }
+    return prevState;
 };

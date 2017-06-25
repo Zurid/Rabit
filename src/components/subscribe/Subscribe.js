@@ -6,7 +6,7 @@ class SubscribeForm extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        this.state = { hunterName: '' };
+        this.state = { hunterName: "Sharp Eye", names: [] };
         this.onChangeName = this.onChangeName.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -21,16 +21,24 @@ class SubscribeForm extends React.Component {
     }
 
     render() {
+        const hunterName = this.state.hunterName;
+        const i = 0;
+        console.log("SubscribeForm", this.props.names);
         return (
             <form >
                 <input type="text"
-                    value={this.props.hunterName}
-                    placeholder="Enter your name"
-                    onChange={this.onChangeName} />
+                    value={hunterName}
+                    placeholder="Enter Hunter's name"
+                    onChange={this.onChangeName}
+                />
                 <button type="button" onClick={this.handleSubmit}>Subscribe</button>
                 <ul>{
-                    this.props.names ? this.props.names.map((name, index) =>
-                        <li key="{index}">{name}</li>) : "--no names--"
+                    this.props.names ?
+                        this.props.names.map((name, index) =>
+                            <div key={index}>{name}</div>
+                        )
+                        : "--no names--"
+
                 }</ul>
             </form>
         );
